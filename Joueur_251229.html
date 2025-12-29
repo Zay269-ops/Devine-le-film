@@ -2,39 +2,21 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Devine le film 🎬</title>
-
+<title>Règles – Devine le film 🎬</title>
 <style>
-body {
-  background:#111;
-  color:white;
-  font-family:Arial, sans-serif;
-  text-align:center;
-  padding:20px;
-}
-#emojis {
-  font-size:60px;
-  margin-top:40px;
-}
+body { background:#111; color:white; font-family:Arial; text-align:center; padding:30px; }
 </style>
 </head>
 
 <body>
 
 <h1>🎬 Devine le film</h1>
-<p>Devine le film à partir des emojis 👇</p>
 
-<div id="emojis">🎥❓</div>
+<p>Regarde les emojis à l’écran 📺</p>
+<p>Devine le film seul ou en équipe</p>
+<p>Annonce ta réponse avant la révélation 👁️</p>
 
-<script>
-function update() {
-  const emojis = localStorage.getItem("currentEmojis");
-  if (emojis) {
-    document.getElementById("emojis").innerText = emojis;
-  }
-}
-setInterval(update, 500);
-</script>
+<p>🎉 Amuse-toi !</p>
 
 </body>
 </html>
