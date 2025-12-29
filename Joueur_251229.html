@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Devine le film 🎬</title>
+
+<style>
+body {
+  background:#111;
+  color:white;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  padding:20px;
+}
+#emojis {
+  font-size:60px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎬 Devine le film</h1>
+<p>Devine le film à partir des emojis 👇</p>
+
+<div id="emojis">🎥❓</div>
+
+<script>
+function update() {
+  const emojis = localStorage.getItem("currentEmojis");
+  if (emojis) {
+    document.getElementById("emojis").innerText = emojis;
+  }
+}
+setInterval(update, 500);
+</script>
+
+</body>
+</html>
