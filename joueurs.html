@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Devine le film 🎬</title>
+<title>Devine le film – Joueur 🎬</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -14,17 +14,22 @@ body {
   padding:30px;
   margin:0;
 }
-h1 { margin-bottom:30px; }
-p {
+input {
+  width:80%;
+  max-width:300px;
   font-size:18px;
-  margin:15px 0;
-  opacity:0.9;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
 }
-.note {
-  margin-top:40px;
-  font-size:14px;
-  opacity:0.6;
+button {
+  font-size:18px;
+  padding:12px 20px;
+  border:none;
+  border-radius:8px;
 }
+.hidden { display:none; }
 </style>
 </head>
 
@@ -32,16 +37,39 @@ p {
 
 <h1>🎬 Devine le film</h1>
 
-<p>👀 Regarde les emojis sur l’écran principal</p>
-<p>🧠 Devine le film seul ou en équipe</p>
-<p>🗣️ Donne ta réponse avant la révélation</p>
-<p>👁️ L’animateur révèle la réponse</p>
-
-<div class="note">
-  Cette page ne permet aucune action
+<div id="login">
+  <p>Entre ton pseudo pour jouer</p>
+  <input id="pseudo" placeholder="Ton pseudo">
+  <br>
+  <button onclick="join()">🎮 Rejoindre</button>
 </div>
 
-<script type="module" src="firebase.js"></script>
+<div id="waiting" class="hidden">
+  <p>✅ Connecté</p>
+  <p>⏳ En attente du lancement…</p>
+</div>
 
+<script type="module">
+import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const db = window.db;
+let playerId = crypto.randomUUID();
+
+window.join = async function () {
+  const pseudo = document.getElementById("pseudo").value.trim();
+  if (!pseudo) return alert("Entre un pseudo");
+
+  await setDoc(doc(collection(db, "players"), playerId), {
+    pseudo: pseudo,
+    score: 0,
+    answer: null
+  });
+
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("waiting").classList.remove("hidden");
+};
+</script>
+
+<script type="module" src="firebase.js"></script>
 </body>
 </html>
