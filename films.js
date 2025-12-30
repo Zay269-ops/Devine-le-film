@@ -9,7 +9,6 @@ const films = [
   { emoji: "🧠🔪🚿", reponse: "Psychose" },
   { emoji: "👽📞🌍", reponse: "E.T." },
   { emoji: "🕶️💊🖥️", reponse: "Matrix" },
-
   { emoji: "🦇🤵‍♂️🌃", reponse: "Batman" },
   { emoji: "🕷️🧑‍🦱🏙️", reponse: "Spider-Man" },
   { emoji: "🧑‍🎤👑🎵", reponse: "Bohemian Rhapsody" },
@@ -20,7 +19,6 @@ const films = [
   { emoji: "🧑‍🚀🤖🌌", reponse: "Star Wars" },
   { emoji: "🧙‍♂️⚡🏰", reponse: "Harry Potter" },
   { emoji: "🦸‍♂️🛡️🇺🇸", reponse: "Captain America" },
-
   { emoji: "🤖🔥🚗", reponse: "Terminator" },
   { emoji: "🧑‍🚀🪐🌽", reponse: "Seul sur Mars" },
   { emoji: "🎭🔪🩸", reponse: "Scream" },
@@ -31,7 +29,6 @@ const films = [
   { emoji: "🧑‍🍳🐀🍝", reponse: "Ratatouille" },
   { emoji: "🚗🧑‍🚒🔥", reponse: "Cars" },
   { emoji: "🧑‍🎓📚✨", reponse: "Harry Potter à l’école des sorciers" },
-
   { emoji: "👮‍♂️🏢💥", reponse: "Die Hard" },
   { emoji: "🧑‍🚀🌕🐒", reponse: "La Planète des Singes" },
   { emoji: "👽🔫🕶️", reponse: "Men in Black" },
@@ -42,7 +39,6 @@ const films = [
   { emoji: "🧑‍🚀🤖❤️", reponse: "Wall-E" },
   { emoji: "🦸‍♂️⚡🌩️", reponse: "Thor" },
   { emoji: "🧑‍🎤🎸🎶", reponse: "Rocketman" },
-
   { emoji: "👶🧔🔫", reponse: "Leon" },
   { emoji: "🧑‍🚀🚀🌍", reponse: "Gravity" },
   { emoji: "🧑‍⚖️🔍🧠", reponse: "Seven" },
