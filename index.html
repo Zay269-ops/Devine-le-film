@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Devine le film – Animateur 🎬</title>
+<title>Devine le film – Animateur</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
@@ -10,25 +10,24 @@
 <style>
 body {
   background:#111;
-  color:white;
+  color:#fff;
   font-family:Arial, sans-serif;
   text-align:center;
   margin:0;
   padding:20px;
 }
-.qr-wrapper {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:25px;
+
+.qr-box {
+  width:200px;              /* 👈 FIXE = STABLE */
+  margin:0 auto 25px auto;  /* 👈 CENTRÉ */
 }
+
 #qrcode {
-  margin-top:8px;
+  width:160px;
+  height:160px;
+  margin:0 auto;
 }
-#players {
-  margin-top:20px;
-}
+
 .player {
   padding:6px;
   border-bottom:1px solid #333;
@@ -38,9 +37,9 @@ body {
 
 <body>
 
-<h1>🎬 Devine le film – Animateur</h1>
+<h1>🎬 Devine le film</h1>
 
-<div class="qr-wrapper">
+<div class="qr-box">
   <div>📱 Scanne pour jouer</div>
   <div id="qrcode"></div>
 </div>
@@ -48,25 +47,34 @@ body {
 <h2>👥 Joueurs connectés</h2>
 <div id="players">Aucun joueur</div>
 
-<!-- Firebase DOIT être chargé AVANT le script jeu -->
-<script type="module" src="firebase.js"></script>
-
 <script type="module">
-import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const db = window.db;
+/* 🔥 TA CONFIG FIREBASE */
+const firebaseConfig = {
+  apiKey: "TON_API_KEY",
+  authDomain: "TON_AUTH_DOMAIN",
+  projectId: "TON_PROJECT_ID",
+  storageBucket: "TON_STORAGE_BUCKET",
+  messagingSenderId: "TON_SENDER_ID",
+  appId: "TON_APP_ID"
+};
 
-/* QR code vers joueurs.html (fiable GitHub Pages) */
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* QR CODE */
 new QRCode(document.getElementById("qrcode"), {
   text: new URL("joueurs.html", window.location.href).href,
   width:160,
   height:160
 });
 
-/* Affichage joueurs en temps réel */
+/* LISTE JOUEURS */
 const playersDiv = document.getElementById("players");
 
-onSnapshot(collection(db, "players"), (snapshot) => {
+onSnapshot(collection(db, "players"), snapshot => {
   playersDiv.innerHTML = "";
   if (snapshot.empty) {
     playersDiv.innerText = "Aucun joueur";
@@ -74,10 +82,10 @@ onSnapshot(collection(db, "players"), (snapshot) => {
   }
   snapshot.forEach(doc => {
     const p = doc.data();
-    const div = document.createElement("div");
-    div.className = "player";
-    div.innerText = `${p.pseudo} — ${p.score} pts`;
-    playersDiv.appendChild(div);
+    const d = document.createElement("div");
+    d.className = "player";
+    d.textContent = p.pseudo;
+    playersDiv.appendChild(d);
   });
 });
 </script>

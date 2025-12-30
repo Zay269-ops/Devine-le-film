@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Devine le film – Joueur 🎬</title>
+<title>Devine le film – Joueur</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -14,20 +14,22 @@ body {
   padding:30px;
   margin:0;
 }
+
 input {
   width:80%;
-  max-width:300px;
+  max-width:280px;
   font-size:18px;
   padding:12px;
-  margin:10px 0;
   border-radius:8px;
   border:none;
 }
+
 button {
   font-size:18px;
   padding:12px 20px;
-  border:none;
   border-radius:8px;
+  border:none;
+  margin-top:10px;
 }
 .hidden { display:none; }
 </style>
@@ -38,37 +40,43 @@ button {
 <h1>🎬 Devine le film</h1>
 
 <div id="login">
-  <p>Entre ton pseudo pour jouer</p>
-  <input id="pseudo" placeholder="Ton pseudo">
+  <p>Entre ton pseudo</p>
+  <input id="pseudo">
   <br>
-  <button id="joinBtn">🎮 Rejoindre</button>
+  <button id="join">🎮 Rejoindre</button>
 </div>
 
 <div id="waiting" class="hidden">
   <p>✅ Connecté</p>
-  <p>⏳ En attente du lancement…</p>
+  <p>⏳ En attente…</p>
 </div>
 
-<!-- Firebase AVANT le code joueur -->
-<script type="module" src="firebase.js"></script>
-
 <script type="module">
-import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const db = window.db;
-const playerId = crypto.randomUUID();
+/* 🔥 TA CONFIG FIREBASE */
+const firebaseConfig = {
+  apiKey: "TON_API_KEY",
+  authDomain: "TON_AUTH_DOMAIN",
+  projectId: "TON_PROJECT_ID",
+  storageBucket: "TON_STORAGE_BUCKET",
+  messagingSenderId: "TON_SENDER_ID",
+  appId: "TON_APP_ID"
+};
 
-document.getElementById("joinBtn").addEventListener("click", async () => {
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("join").addEventListener("click", async () => {
   const pseudo = document.getElementById("pseudo").value.trim();
-  if (!pseudo) {
-    alert("Entre un pseudo");
-    return;
-  }
+  if (!pseudo) return alert("Entre un pseudo");
 
-  await setDoc(doc(collection(db, "players"), playerId), {
-    pseudo: pseudo,
-    score: 0,
-    answer: null
+  const id = crypto.randomUUID();
+
+  await setDoc(doc(collection(db, "players"), id), {
+    pseudo,
+    score: 0
   });
 
   document.getElementById("login").classList.add("hidden");
