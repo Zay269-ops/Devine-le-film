@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Devine le film 🎬</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  background:#111;
+  color:white;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  padding:20px;
+}
+button {
+  font-size:18px;
+  padding:15px 25px;
+  margin:10px;
+}
+#emojis {
+  font-size:60px;
+  margin:30px;
+}
+#answer {
+  display:none;
+  font-size:28px;
+  color:#4CAF50;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+</head>
+
+<div style="margin-top:40px; display:flex; flex-direction:column; align-items:center;">
+  <h3>📱 Scanne pour les règles</h3>
+  <div id="qrcode"></div>
+</div>
+
+<body>
+
+<h1>🎬 Devine le film</h1>
+
+<div id="emojis">🎥❓</div>
+<div id="answer"></div>
+
+<button onclick="next()">🎲 Question suivante</button>
+<button onclick="reveal()">👁️ Révéler</button>
+
+<script src="films.js"></script>
+
+<script>
+let current = null;
+
+function next() {
+  current = films[Math.floor(Math.random() * films.length)];
+  document.getElementById("emojis").innerText = current.emojis;
+  document.getElementById("answer").innerText = current.title;
+  document.getElementById("answer").style.display = "none";
+}
+
+function reveal() {
+  if (current) {
+    document.getElementById("answer").style.display = "block";
+  }
+}
+
+new QRCode(document.getElementById("qrcode"), {
+  text: window.location.origin + window.location.pathname.replace("index.html","joueurs.html"),
+  width: 160,
+  height: 160
+});
+</script>
+
+</body>
+</html>
