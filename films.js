@@ -52,5 +52,62 @@ const films = [
   { emojis: "🎩🪄🎥", title: "The Prestige" },
   { emojis: "👻🏨❄️", title: "Shining" },
   { emojis: "🧑‍🚀🧠🤯", title: "Premier Contact" },
-  { emojis: "🦸‍♂️🕷️🕸️", title: "Spider-Man No Way Home" }
+  { emojis: "🦸‍♂️🕷️🕸️", title: "Spider-Man No Way Home" },
+
+  { emojis: "🧑‍🚀🌌🚀", title: "Star Wars : Un nouvel espoir" },
+  { emojis: "🧑‍🚀🤖⚔️", title: "Star Wars : L’Empire contre-attaque" },
+  { emojis: "🧑‍🚀👑🔥", title: "Star Wars : Le Retour du Jedi" },
+  { emojis: "🧙‍♂️🪄🐍", title: "Harry Potter et la Chambre des secrets" },
+  { emojis: "🧙‍♂️🔥🏆", title: "Harry Potter et la Coupe de feu" },
+  { emojis: "🧙‍♂️🦉🌑", title: "Harry Potter et le Prisonnier d’Azkaban" },
+  { emojis: "🧙‍♂️⚔️💀", title: "Harry Potter et les Reliques de la Mort" },
+
+  { emojis: "🦸‍♂️🛡️💥", title: "Avengers" },
+  { emojis: "🦸‍♂️🧤💎", title: "Avengers : Infinity War" },
+  { emojis: "🦸‍♂️⏳💥", title: "Avengers : Endgame" },
+  { emojis: "🦸‍♀️🛡️⚔️", title: "Wonder Woman" },
+  { emojis: "🦸‍♂️🦇🌃", title: "The Dark Knight" },
+
+  { emojis: "🧠🪚⏱️", title: "Saw" },
+  { emojis: "👻📖😱", title: "Conjuring" },
+  { emojis: "🎃🔪😨", title: "Halloween" },
+  { emojis: "📞🔪😱", title: "Scream 2" },
+  { emojis: "🪓❄️🏨", title: "Shining" },
+
+  { emojis: "🎭🃏🔥", title: "Joker" },
+  { emojis: "🐺💰📈", title: "Le Loup de Wall Street" },
+  { emojis: "🧠🧼👊", title: "Fight Club" },
+  { emojis: "🔫🍔🕺", title: "Pulp Fiction" },
+  { emojis: "📦😱🔪", title: "Seven" },
+
+  { emojis: "🎮🕶️🌍", title: "Ready Player One" },
+  { emojis: "🧠🪐🌍", title: "Gravity" },
+  { emojis: "🧠👽📡", title: "Premier Contact" },
+  { emojis: "🧑‍🚀🌱🤖", title: "Wall-E" },
+  { emojis: "🤖🧠🌃", title: "I, Robot" },
+
+  { emojis: "🚗🔥🏁", title: "Fast & Furious 7" },
+  { emojis: "🚗💣🔥", title: "Fast & Furious 9" },
+  { emojis: "🚓💥🏙️", title: "Bad Boys" },
+  { emojis: "🕴️🔫🍸", title: "James Bond : Skyfall" },
+  { emojis: "🕵️💣🏃", title: "Mission Impossible" },
+
+  { emojis: "🧑‍🍳🔥🍽️", title: "Julie & Julia" },
+  { emojis: "🍿🎥🎭", title: "Cinema Paradiso" },
+  { emojis: "🎶💃🌆", title: "La La Land" },
+  { emojis: "🎪🎤✨", title: "The Greatest Showman" },
+  { emojis: "🎤👑🎸", title: "Bohemian Rhapsody" },
+
+  { emojis: "👨‍👩‍👧‍👦🏠❤️", title: "Little Miss Sunshine" },
+  { emojis: "🧑‍⚖️⚖️🧠", title: "Douze hommes en colère" },
+  { emojis: "🪖🇺🇸🎖️", title: "Il faut sauver le soldat Ryan" },
+  { emojis: "🧑‍🚒🔥🚒", title: "Backdraft" },
+  { emojis: "🏹🔥🕊️", title: "Hunger Games" },
+
+  { emojis: "🧑‍🚀🪐🧠", title: "Moon" },
+  { emojis: "🧑‍🚀🤯⏳", title: "Looper" },
+  { emojis: "🦍🌆🔥", title: "King Kong" },
+  { emojis: "🐉🔥👑", title: "Dragons" },
+  { emojis: "🐼🥋⛰️", title: "Kung Fu Panda 2" }
+
 ];

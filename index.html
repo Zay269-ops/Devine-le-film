@@ -45,9 +45,14 @@ button {
 
 <div id="emojis">🎥❓</div>
 <div id="answer">Clique sur « Question suivante »</div>
+<div id="timer" style="font-size:32px; margin:20px; color:#ff5252;">
+  ⏱️ 30
+</div>
 
 <button onclick="next()">🎲 Question suivante</button>
 <button onclick="reveal()">👁️ Révéler</button>
+<button onclick="startTimer()">▶️ Démarrer le chrono</button>
+<button onclick="resetTimer()">🔄 Reset chrono</button>
 
 <script src="films.js"></script>
 
@@ -59,6 +64,7 @@ function next() {
   document.getElementById("emojis").innerText = current.emojis;
   document.getElementById("answer").innerText = current.title;
   document.getElementById("answer").style.display = "none";
+  resetTimer();
 }
 
 function reveal() {
@@ -70,7 +76,32 @@ new QRCode(document.getElementById("qrcode"), {
   text: window.location.origin + window.location.pathname.replace("index.html","joueurs.html"),
   width: 160,
   height: 160
-});
+
+let timer = 30;
+let interval = null;
+
+function startTimer() {
+  clearInterval(interval);
+  timer = 30;
+  document.getElementById("timer").innerText = "⏱️ " + timer;
+
+  interval = setInterval(() => {
+    timer--;
+    document.getElementById("timer").innerText = "⏱️ " + timer;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      document.getElementById("timer").innerText = "⏱️ Temps écoulé";
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(interval);
+  timer = 30;
+  document.getElementById("timer").innerText = "⏱️ " + timer;
+}
+
 </script>
 
 </body>
