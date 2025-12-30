@@ -41,7 +41,7 @@ button {
   <p>Entre ton pseudo pour jouer</p>
   <input id="pseudo" placeholder="Ton pseudo">
   <br>
-  <button onclick="join()">🎮 Rejoindre</button>
+  <button id="joinBtn">🎮 Rejoindre</button>
 </div>
 
 <div id="waiting" class="hidden">
@@ -49,15 +49,21 @@ button {
   <p>⏳ En attente du lancement…</p>
 </div>
 
+<!-- Firebase AVANT le code joueur -->
+<script type="module" src="firebase.js"></script>
+
 <script type="module">
 import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const db = window.db;
-let playerId = crypto.randomUUID();
+const playerId = crypto.randomUUID();
 
-window.join = async function () {
+document.getElementById("joinBtn").addEventListener("click", async () => {
   const pseudo = document.getElementById("pseudo").value.trim();
-  if (!pseudo) return alert("Entre un pseudo");
+  if (!pseudo) {
+    alert("Entre un pseudo");
+    return;
+  }
 
   await setDoc(doc(collection(db, "players"), playerId), {
     pseudo: pseudo,
@@ -67,9 +73,8 @@ window.join = async function () {
 
   document.getElementById("login").classList.add("hidden");
   document.getElementById("waiting").classList.remove("hidden");
-};
+});
 </script>
 
-<script type="module" src="firebase.js"></script>
 </body>
 </html>

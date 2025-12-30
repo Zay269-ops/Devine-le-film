@@ -13,8 +13,18 @@ body {
   color:white;
   font-family:Arial, sans-serif;
   text-align:center;
-  padding:20px;
   margin:0;
+  padding:20px;
+}
+.qr-wrapper {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:25px;
+}
+#qrcode {
+  margin-top:8px;
 }
 #players {
   margin-top:20px;
@@ -30,24 +40,30 @@ body {
 
 <h1>🎬 Devine le film – Animateur</h1>
 
-<div id="qrcode"></div>
+<div class="qr-wrapper">
+  <div>📱 Scanne pour jouer</div>
+  <div id="qrcode"></div>
+</div>
 
 <h2>👥 Joueurs connectés</h2>
 <div id="players">Aucun joueur</div>
+
+<!-- Firebase DOIT être chargé AVANT le script jeu -->
+<script type="module" src="firebase.js"></script>
 
 <script type="module">
 import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const db = window.db;
 
-/* QR CODE → joueurs.html */
+/* QR code vers joueurs.html (fiable GitHub Pages) */
 new QRCode(document.getElementById("qrcode"), {
   text: new URL("joueurs.html", window.location.href).href,
   width:160,
   height:160
 });
 
-/* LISTE DES JOUEURS EN TEMPS RÉEL */
+/* Affichage joueurs en temps réel */
 const playersDiv = document.getElementById("players");
 
 onSnapshot(collection(db, "players"), (snapshot) => {
@@ -66,6 +82,5 @@ onSnapshot(collection(db, "players"), (snapshot) => {
 });
 </script>
 
-<script type="module" src="firebase.js"></script>
 </body>
 </html>
