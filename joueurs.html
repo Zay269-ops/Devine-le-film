@@ -74,10 +74,14 @@ document.getElementById("join").addEventListener("click", async () => {
 
   const id = crypto.randomUUID();
 
-  await setDoc(doc(collection(db, "players"), id), {
-    pseudo,
-    score: 0
-  });
+await setDoc(doc(collection(db, "players"), id), {
+  pseudo,
+  score: 0,
+  joinedAt: Date.now()
+});
+
+alert("✅ Tu as rejoint la partie !");
+
 
   document.getElementById("login").classList.add("hidden");
   document.getElementById("waiting").classList.remove("hidden");
