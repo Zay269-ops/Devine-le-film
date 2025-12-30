@@ -90,7 +90,7 @@ let timerInterval = null;
 
 /* === QR CODE === */
 new QRCode(document.getElementById("qrcode"), {
-  text: window.location.origin + "/devine-le-film/index.html?mode=joueur",
+  text: window.location.href.split("?")[0] + "?mode=joueur",
   width:160,
   height:160
 });
