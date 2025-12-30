@@ -90,7 +90,7 @@ let timerInterval = null;
 
 /* === QR CODE === */
 new QRCode(document.getElementById("qrcode"), {
-  text: window.location.origin + window.location.pathname.replace("index.html","joueurs.html"),
+  text: window.location.origin + "/devine-le-film/index.html?mode=joueur",
   width:160,
   height:160
 });
@@ -138,6 +138,15 @@ function resetTimer() {
 
 function updateTimer() {
   document.getElementById("timer").innerText = "⏱️ " + time;
+}
+
+const params = new URLSearchParams(window.location.search);
+const isJoueur = params.get("mode") === "joueur";
+
+if (isJoueur) {
+  document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
+  document.getElementById("timer").style.display = "none";
+  document.getElementById("answer").style.display = "none";
 }
 </script>
 
