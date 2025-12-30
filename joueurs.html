@@ -72,13 +72,32 @@ document.getElementById("join").addEventListener("click", async () => {
   const pseudo = document.getElementById("pseudo").value.trim();
   if (!pseudo) return alert("Entre un pseudo");
 
-  const id = crypto.randomUUID();
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-await setDoc(doc(collection(db, "players"), id), {
-  pseudo,
-  score: 0,
-  joinedAt: Date.now()
+document.getElementById("join").addEventListener("click", async () => {
+  const pseudo = document.getElementById("pseudo").value.trim();
+  if (!pseudo) {
+    alert("Entre un pseudo");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "players"), {
+      pseudo: pseudo,
+      score: 0,
+      joinedAt: Date.now()
+    });
+
+    alert("✅ Tu as rejoint la partie !");
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("waiting").classList.remove("hidden");
+
+  } catch (e) {
+    alert("❌ Erreur : " + e.message);
+    console.error(e);
+  }
 });
+
 
 alert("✅ Tu as rejoint la partie !");
 
