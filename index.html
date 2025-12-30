@@ -44,7 +44,7 @@ button {
 <h1>🎬 Devine le film</h1>
 
 <div id="emojis">🎥❓</div>
-<div id="answer"></div>
+<div id="answer">Clique sur « Question suivante »</div>
 
 <button onclick="next()">🎲 Question suivante</button>
 <button onclick="reveal()">👁️ Révéler</button>
@@ -62,9 +62,8 @@ function next() {
 }
 
 function reveal() {
-  if (current) {
-    document.getElementById("answer").style.display = "block";
-  }
+  if (!current) return;
+  document.getElementById("answer").style.display = "block";
 }
 
 new QRCode(document.getElementById("qrcode"), {
