@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Devine le film 🎬</title>
+<title>Devine le film – Animateur 🎬</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="manifest" href="manifest.json">
@@ -17,12 +17,10 @@ body {
   color:white;
   font-family:Arial, sans-serif;
   text-align:center;
-  padding:20px;
   margin:0;
+  padding:20px;
 }
-h1 {
-  margin-top:20px;
-}
+h1 { margin:15px 0; }
 #emojis {
   font-size:64px;
   margin:30px 0;
@@ -36,11 +34,11 @@ h1 {
 #timer {
   font-size:32px;
   color:#ff5252;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 button {
-  width:80%;
-  max-width:320px;
+  width:90%;
+  max-width:340px;
   font-size:18px;
   padding:15px;
   margin:8px auto;
@@ -49,25 +47,20 @@ button {
   border-radius:12px;
   cursor:pointer;
 }
-button:active {
-  transform:scale(0.97);
-}
-#qrcode {
-  margin-top:20px;
+button:active { transform:scale(0.97); }
+.qr {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div style="
-  margin-top:15px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-">
-  <div style="margin-bottom:8px;">📱 Scanne pour les règles</div>
+<div class="qr">
+  <div>📱 Scanne pour jouer</div>
   <div id="qrcode"></div>
 </div>
 
@@ -83,70 +76,56 @@ button:active {
 <button onclick="resetTimer()">🔄 Reset chrono</button>
 
 <script>
-/* === VARIABLES === */
-let currentFilm = null;
-let time = 30;
-let timerInterval = null;
-
-/* === QR CODE === */
+/* ===== QR CODE (FIXE, FIABLE, AUCUN 404) ===== */
 new QRCode(document.getElementById("qrcode"), {
-  text: window.location.href.split("?")[0] + "?mode=joueur",
+  text: window.location.origin + window.location.pathname.replace("animateur.html","joueurs.html"),
   width:160,
   height:160
 });
 
-/* === FONCTIONS JEU === */
+/* ===== JEU ===== */
+let current = null;
+let time = 30;
+let interval = null;
+
 function nextFilm() {
   if (!films || films.length === 0) return;
-
-  currentFilm = films[Math.floor(Math.random() * films.length)];
-
-  document.getElementById("emojis").innerText = currentFilm.emojis;
-  document.getElementById("answer").innerText = currentFilm.title;
+  current = films[Math.floor(Math.random() * films.length)];
+  document.getElementById("emojis").innerText = current.emojis;
+  document.getElementById("answer").innerText = current.title;
   document.getElementById("answer").style.display = "none";
-
   resetTimer();
 }
 
 function reveal() {
-  if (!currentFilm) return;
+  if (!current) return;
   document.getElementById("answer").style.display = "block";
 }
 
-/* === CHRONO === */
+/* ===== CHRONO ===== */
 function startTimer() {
-  clearInterval(timerInterval);
+  clearInterval(interval);
   time = 30;
   updateTimer();
 
-  timerInterval = setInterval(() => {
+  interval = setInterval(() => {
     time--;
     updateTimer();
-
     if (time <= 0) {
-      clearInterval(timerInterval);
+      clearInterval(interval);
       document.getElementById("timer").innerText = "⏱️ Temps écoulé";
     }
   }, 1000);
 }
 
 function resetTimer() {
-  clearInterval(timerInterval);
+  clearInterval(interval);
   time = 30;
   updateTimer();
 }
 
 function updateTimer() {
   document.getElementById("timer").innerText = "⏱️ " + time;
-}
-
-const params = new URLSearchParams(window.location.search);
-const isJoueur = params.get("mode") === "joueur";
-
-if (isJoueur) {
-  document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
-  document.getElementById("timer").style.display = "none";
-  document.getElementById("answer").style.display = "none";
 }
 </script>
 
