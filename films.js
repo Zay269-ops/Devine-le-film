@@ -1,5 +1,4 @@
 const films = [
-  
   { emoji: "🧙‍♂️💍🌋", reponse: "Le Seigneur des Anneaux" },
   { emoji: "🧑‍🚀🌕🚀", reponse: "Interstellar" },
   { emoji: "🦁👑🌍", reponse: "Le Roi Lion" },
@@ -54,6 +53,4 @@ const films = [
   { emoji: "👻🏨❄️", reponse: "Shining" },
   { emoji: "🧑‍🚀🧠🤯", reponse: "Premier Contact" },
   { emoji: "🦸‍♂️🕷️🕸️", reponse: "Spider-Man No Way Home" }
-  
 ];
-
