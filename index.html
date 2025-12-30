@@ -5,6 +5,12 @@
 <title>Devine le film 🎬</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+
+<script src="films.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
 <style>
 body {
   background:#111;
@@ -12,96 +18,119 @@ body {
   font-family:Arial, sans-serif;
   text-align:center;
   padding:20px;
+  margin:0;
 }
-button {
-  font-size:18px;
-  padding:15px 25px;
-  margin:10px;
+h1 {
+  margin-top:20px;
 }
 #emojis {
-  font-size:60px;
-  margin:30px;
+  font-size:64px;
+  margin:30px 0;
 }
 #answer {
-  display:none;
   font-size:28px;
   color:#4CAF50;
+  display:none;
+  margin-bottom:20px;
+}
+#timer {
+  font-size:32px;
+  color:#ff5252;
+  margin-bottom:25px;
+}
+button {
+  width:80%;
+  max-width:320px;
+  font-size:18px;
+  padding:15px;
+  margin:8px auto;
+  display:block;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+button:active {
+  transform:scale(0.97);
+}
+#qrcode {
+  margin-top:20px;
 }
 </style>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
 </head>
 
-<div style="margin-top:40px; display:flex; flex-direction:column; align-items:center;">
-  <h3>📱 Scanne pour les règles</h3>
-  <div id="qrcode"></div>
-</div>
-
 <body>
+
+<div style="margin-top:10px;">📱 Scanne pour les règles</div>
+<div id="qrcode"></div>
 
 <h1>🎬 Devine le film</h1>
 
 <div id="emojis">🎥❓</div>
 <div id="answer">Clique sur « Question suivante »</div>
-<div id="timer" style="font-size:32px; margin:20px; color:#ff5252;">
-  ⏱️ 30
-</div>
+<div id="timer">⏱️ 30</div>
 
-<button onclick="next()">🎲 Question suivante</button>
+<button onclick="nextFilm()">🎲 Question suivante</button>
 <button onclick="reveal()">👁️ Révéler</button>
 <button onclick="startTimer()">▶️ Démarrer le chrono</button>
 <button onclick="resetTimer()">🔄 Reset chrono</button>
 
-<script src="films.js"></script>
-
 <script>
-let current = null;
+/* === VARIABLES === */
+let currentFilm = null;
+let time = 30;
+let timerInterval = null;
 
-function next() {
-  current = films[Math.floor(Math.random() * films.length)];
-  document.getElementById("emojis").innerText = current.emojis;
-  document.getElementById("answer").innerText = current.title;
+/* === QR CODE === */
+new QRCode(document.getElementById("qrcode"), {
+  text: window.location.origin + window.location.pathname.replace("index.html","joueurs.html"),
+  width:160,
+  height:160
+});
+
+/* === FONCTIONS JEU === */
+function nextFilm() {
+  if (!films || films.length === 0) return;
+
+  currentFilm = films[Math.floor(Math.random() * films.length)];
+
+  document.getElementById("emojis").innerText = currentFilm.emojis;
+  document.getElementById("answer").innerText = currentFilm.title;
   document.getElementById("answer").style.display = "none";
+
   resetTimer();
 }
 
 function reveal() {
-  if (!current) return;
+  if (!currentFilm) return;
   document.getElementById("answer").style.display = "block";
 }
 
-new QRCode(document.getElementById("qrcode"), {
-  text: window.location.origin + window.location.pathname.replace("index.html","joueurs.html"),
-  width: 160,
-  height: 160
-
-let timer = 30;
-let interval = null;
-
+/* === CHRONO === */
 function startTimer() {
-  clearInterval(interval);
-  timer = 30;
-  document.getElementById("timer").innerText = "⏱️ " + timer;
+  clearInterval(timerInterval);
+  time = 30;
+  updateTimer();
 
-  interval = setInterval(() => {
-    timer--;
-    document.getElementById("timer").innerText = "⏱️ " + timer;
+  timerInterval = setInterval(() => {
+    time--;
+    updateTimer();
 
-    if (timer <= 0) {
-      clearInterval(interval);
+    if (time <= 0) {
+      clearInterval(timerInterval);
       document.getElementById("timer").innerText = "⏱️ Temps écoulé";
     }
   }, 1000);
 }
 
 function resetTimer() {
-  clearInterval(interval);
-  timer = 30;
-  document.getElementById("timer").innerText = "⏱️ " + timer;
+  clearInterval(timerInterval);
+  time = 30;
+  updateTimer();
 }
 
+function updateTimer() {
+  document.getElementById("timer").innerText = "⏱️ " + time;
+}
 </script>
 
 </body>
