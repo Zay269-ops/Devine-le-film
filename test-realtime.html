@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Test Realtime Database</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="font-family:Arial;text-align:center;padding:40px;">
+<h2>Test Firebase Realtime Database</h2>
+
+<button id="btn" style="font-size:18px;padding:12px 20px;">
+  Écrire dans la base
+</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+  // 🔥 TA CONFIG FIREBASE (EXACTEMENT la même que Firestore)
+  const firebaseConfig = {
+    apiKey: "TON_API_KEY",
+    authDomain: "TON_AUTH_DOMAIN",
+    databaseURL: "https://TON_PROJECT_ID-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "TON_PROJECT_ID",
+    storageBucket: "TON_STORAGE_BUCKET",
+    messagingSenderId: "TON_SENDER_ID",
+    appId: "TON_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  const db = firebase.database();
+
+  document.getElementById("btn").onclick = () => {
+    db.ref("test").push({
+      ok: true,
+      date: Date.now()
+    }).then(() => {
+      alert("✅ Écriture réussie !");
+    }).catch(err => {
+      alert("❌ Erreur : " + err.message);
+      console.error(err);
+    });
+  };
+</script>
+
+</body>
+</html>
+
